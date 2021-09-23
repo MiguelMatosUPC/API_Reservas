@@ -4,5 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppReservas.Backend.Data\AppReservas.Backend.Data.csproj" />
+    <ProjectReference Include="..\AppReservas.Backend.Entity\AppReservas.Backend.Entity.csproj" />
+  </ItemGroup>
+
 
 </Project>
