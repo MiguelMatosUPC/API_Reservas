@@ -30,6 +30,7 @@ namespace AppReservas.Backend.API
             services.AddControllers();
 
             services.AddTransient<IEspecialidadRepository, EspecialidadRepository>();
+            services.AddTransient<IUtilRepository, UtilRepository>();
 
         }
 
