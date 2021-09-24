@@ -37,13 +37,15 @@ namespace AppReservas.Backend.Data.Repository
                             obj.IdPaciente = reader.GetInt32(0);
                             obj.IdTipoDocumento = reader.GetInt32(1);
                             obj.TipoDocumento = reader.GetString(2);
-                            obj.Nombres = reader.GetString(3);
-                            obj.ApellidoPaterno = reader.GetString(4);
-                            obj.ApellidoMaterno = reader.GetString(5);
-                            obj.Sexo = reader.GetString(6);
-                            obj.Telefono = reader.GetString(7);
-                            obj.Pass = reader.GetString(8);
-                            obj.Estado = reader.GetString(9);
+                            obj.NroDocumento = reader.GetString(3);
+                            obj.Nombres = reader.GetString(4);
+                            obj.ApellidoPaterno = reader.GetString(5);
+                            obj.ApellidoMaterno = reader.GetString(6);
+                            obj.Sexo = reader.GetString(7);
+                            obj.Telefono = reader.GetString(8);
+                            obj.Email = reader.GetString(9);
+                            obj.Pass = reader.GetString(10);
+                            obj.Estado = reader.GetString(11);
                             lst.Add(obj);
                         }
                     }
@@ -56,7 +58,7 @@ namespace AppReservas.Backend.Data.Repository
             return lst;
         }
 
-        public int MantenerPaciente(int nAccion, PacienteDTO paciente)
+        public int MantenerPaciente(PacienteRequest request)
         {
             int result = 0;
             Conexion conexion = new Conexion();
@@ -69,18 +71,18 @@ namespace AppReservas.Backend.Data.Repository
                 using (SqlCommand cmd = new SqlCommand(sql, conexion.GetConnection()))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@pIdPaciente", nAccion);
-                    cmd.Parameters.AddWithValue("@pIdPaciente", paciente.IdPaciente.HasValue ? paciente.IdPaciente : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pTipoDocumento", paciente.IdTipoDocumento.HasValue ? paciente.IdTipoDocumento : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pNroDocumento", !string.IsNullOrEmpty(paciente.NroDocumento) ? paciente.NroDocumento.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pNombres", !string.IsNullOrEmpty(paciente.Nombres) ? paciente.Nombres.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pApellidoPaterno", !string.IsNullOrEmpty(paciente.ApellidoPaterno) ? paciente.ApellidoPaterno.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pApellidoMaterno", !string.IsNullOrEmpty(paciente.ApellidoMaterno) ? paciente.ApellidoMaterno.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pSexo", !string.IsNullOrEmpty(paciente.Sexo) ? paciente.Sexo : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pTelefono", !string.IsNullOrEmpty(paciente.Telefono) ? paciente.Telefono : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pEmail", !string.IsNullOrEmpty(paciente.Email) ? paciente.Email : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pPass", !string.IsNullOrEmpty(paciente.Pass) ? paciente.Pass : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pEstado", !string.IsNullOrEmpty(paciente.Estado) ? paciente.Estado : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pAccion", request.Accion);
+                    cmd.Parameters.AddWithValue("@pIdPaciente", request.paciente.IdPaciente.HasValue ? request.paciente.IdPaciente : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pTipoDocumento", request.paciente.IdTipoDocumento.HasValue ? request.paciente.IdTipoDocumento : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pNroDocumento", !string.IsNullOrEmpty(request.paciente.NroDocumento) ? request.paciente.NroDocumento.Trim() : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pNombres", !string.IsNullOrEmpty(request.paciente.Nombres) ? request.paciente.Nombres.Trim() : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pApellidoPaterno", !string.IsNullOrEmpty(request.paciente.ApellidoPaterno) ? request.paciente.ApellidoPaterno.Trim() : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pApellidoMaterno", !string.IsNullOrEmpty(request.paciente.ApellidoMaterno) ? request.paciente.ApellidoMaterno.Trim() : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pSexo", !string.IsNullOrEmpty(request.paciente.Sexo) ? request.paciente.Sexo : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pTelefono", !string.IsNullOrEmpty(request.paciente.Telefono) ? request.paciente.Telefono : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pEmail", !string.IsNullOrEmpty(request.paciente.Email) ? request.paciente.Email : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pPass", !string.IsNullOrEmpty(request.paciente.Pass) ? request.paciente.Pass : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pEstado", !string.IsNullOrEmpty(request.paciente.Estado) ? request.paciente.Estado : (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                     result = 1;

@@ -31,7 +31,9 @@ namespace AppReservas.Backend.API
 
             services.AddTransient<IEspecialidadRepository, EspecialidadRepository>();
             services.AddTransient<IUtilRepository, UtilRepository>();
+            services.AddTransient<IPacienteRepository, PacienteRepository>();
 
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,14 @@ namespace AppReservas.Backend.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Reservas V1");
+            });
+
 
             app.UseAuthorization();
 

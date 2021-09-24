@@ -7,7 +7,7 @@ namespace AppReservas.Backend.Data
 {
     public interface IPacienteRepository
     {
-        int MantenerPaciente(int nAccion, PacienteDTO paciente);
+        int MantenerPaciente(PacienteRequest request);
         List<PacienteDTO> Listar(PacienteFilter filter);
     }
 }
