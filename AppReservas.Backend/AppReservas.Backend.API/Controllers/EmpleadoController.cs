@@ -11,7 +11,7 @@ namespace AppReservas.Backend.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmpleadoController : Controller
+    public class EmpleadoController : ControllerBase
     {
         private readonly IEmpleadoRepository _repo;
         public EmpleadoController(IEmpleadoRepository repo)

@@ -1,4 +1,5 @@
 using AppReservas.Backend.Data;
+using AppReservas.Backend.Data.Interface;
 using AppReservas.Backend.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,7 @@ namespace AppReservas.Backend.API
             services.AddTransient<IEspecialidadRepository, EspecialidadRepository>();
             services.AddTransient<IUtilRepository, UtilRepository>();
             services.AddTransient<IPacienteRepository, PacienteRepository>();
+            services.AddTransient<IEmpleadoRepository, EmpleadoRepository>();
 
             services.AddSwaggerGen();
         }
