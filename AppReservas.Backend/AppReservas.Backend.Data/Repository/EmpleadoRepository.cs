@@ -86,6 +86,7 @@ namespace AppReservas.Backend.Data.Repository
                     cmd.Parameters.AddWithValue("@pTelefono", !string.IsNullOrEmpty(request.empleado.Telefono) ? request.empleado.Telefono : (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@pEmail", !string.IsNullOrEmpty(request.empleado.Email) ? request.empleado.Email : (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@pPass", !string.IsNullOrEmpty(request.empleado.Pass) ? request.empleado.Pass : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pIdCargo", request.empleado.IdCargo);
                     cmd.Parameters.AddWithValue("@pEstado", !string.IsNullOrEmpty(request.empleado.Estado) ? request.empleado.Estado : (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
