@@ -9,6 +9,6 @@ namespace AppReservas.Backend.Data.Interface
     public interface IEmpleadoRepository
     {
         int MantenerEmpleado(EmpleadoRequest request);
-        List<EmpleadoDTO> Listar(EmpleadoFilter filter);
+        List<EmpleadoDTO> Listar();
     }
 }

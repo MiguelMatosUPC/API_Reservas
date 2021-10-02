@@ -10,7 +10,7 @@ namespace AppReservas.Backend.Data.Repository
 {
     public class EmpleadoRepository : IEmpleadoRepository
     {
-        public List<EmpleadoDTO> Listar(EmpleadoFilter filter)
+        public List<EmpleadoDTO> Listar()
         {
             Conexion conexion = new Conexion();
 
@@ -22,15 +22,15 @@ namespace AppReservas.Backend.Data.Repository
                 using (SqlCommand cmd = new SqlCommand(sql, conexion.GetConnection()))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@pIdEmpleado", filter.IdEmpleado.HasValue ? filter.IdEmpleado : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pTipoDocumento", filter.IdTipoDocumento.HasValue ? filter.IdTipoDocumento : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pNroDocumento", !string.IsNullOrEmpty(filter.NroDocumento) ? filter.NroDocumento.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pNombres", !string.IsNullOrEmpty(filter.Nombres) ? filter.Nombres.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pApellidoPaterno", !string.IsNullOrEmpty(filter.ApellidoPaterno) ? filter.ApellidoPaterno.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pApellidoMaterno", !string.IsNullOrEmpty(filter.ApellidoMaterno) ? filter.ApellidoMaterno.Trim() : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pSexo", !string.IsNullOrEmpty(filter.Sexo) ? filter.Sexo : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pIdCargo", filter.IdCargo.HasValue ? filter.IdCargo : (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@pEstado", !string.IsNullOrEmpty(filter.Estado) ? filter.Estado : (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pIdEmpleado", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pTipoDocumento", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pNroDocumento", string.Empty);
+                    cmd.Parameters.AddWithValue("@pNombres", string.Empty);
+                    cmd.Parameters.AddWithValue("@pApellidoPaterno", string.Empty);
+                    cmd.Parameters.AddWithValue("@pApellidoMaterno", string.Empty);
+                    cmd.Parameters.AddWithValue("@pSexo", string.Empty);
+                    cmd.Parameters.AddWithValue("@pIdCargo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@pEstado", string.Empty);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
